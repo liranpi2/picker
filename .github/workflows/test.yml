@@ -25,7 +25,7 @@ jobs:
           file: "DSInternals_v4.7.zip"
           target: "test/DSInternals_v4.7.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - uses: actions/checkout@v2
       - run: |
-          ls -f
+          echo 'ls -f'
+          cd test/
+          echo 'ls -f'
