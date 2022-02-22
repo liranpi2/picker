@@ -25,6 +25,10 @@ jobs:
           file: "DSInternals_v4.7.zip"
           target: "test/DSInternals_v4.7.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          chmod ugo+rwx ./test
+          echo 'ls -ltr'
+          
       - uses: actions/upload-artifact@v2
         with:
           name: DSInternals_v4.7.zip
