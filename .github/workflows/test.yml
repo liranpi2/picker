@@ -17,7 +17,15 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Create a subdirectory
+        run: |
+          mkdir test
+
       - name: Download artifact
+        id: get_release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "MichaelGrafnetter/DSInternals"
@@ -26,8 +34,10 @@ jobs:
           target: "test/DSInternals_v4.7.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          git update-index --chmod=+x ./test
-          echo 'ls -ltr'
+          echo ${{ steps.get_release.outputs.version }}
+          echo ${{ steps.get_release.outputs.name }}
+          echo ${{ steps.get_release.outputs.body }}
+          ls -l test/DSInternals_v4.7.zip
           
       - uses: actions/upload-artifact@v2
         with:
