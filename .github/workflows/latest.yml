@@ -38,7 +38,7 @@ jobs:
         with:
           repo: "MichaelGrafnetter/DSInternals"
           version: "latest"
-          file: "DSInternals_v4.7.zip"
+          file: ${{ steps.api.outputs.filename}}
           target: "test/DSInternals_v4.7.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
