@@ -20,10 +20,10 @@ jobs:
         - name: set output
           id: set
           run: |
-             echo ::set-output name=link::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest | jq .assets[0].browser_download_url`
+             echo ::set-output name=link::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest`
         - name: use output
           run: |
-            echo $link
+            echo `$link | jq .assets[0].browser_download_url`
           env:
             link: ${{ steps.set.outputs.link}}
 
