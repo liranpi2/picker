@@ -1,0 +1,29 @@
+name: pick
+
+on:
+  workflow_dispatch:
+    inputs:
+          logLevel:
+            description: 'Log level'     
+            required: true
+            default: 'warning'
+          tags:
+            description: 'build scenario tag'  
+            
+permissions: write-all
+
+jobs:
+  pick:
+    runs-on: ubuntu-latest
+   
+    steps:
+     - name: set output
+          id: set
+          run: |
+             echo ::set-output name=link::`curl -s https://api.github.com/repos/VirusTotal/yara/releases/latest | jq .assets[0].browser_download_url`
+        - name: use output
+          run: |
+            echo $link'
+          env:
+            link: ${{ steps.set.outputs.link}}
+      
