@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-     - name: set output
+        - name: set output
           id: set
           run: |
              echo ::set-output name=link::`curl -s https://api.github.com/repos/VirusTotal/yara/releases/latest | jq .assets[0].browser_download_url`
