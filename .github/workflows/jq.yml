@@ -24,6 +24,7 @@ jobs:
         - name: use output
           run: |
             echo $link | jq .assets[0].browser_download_url
+            echo $link | jq .tag_name
           env:
             link: ${{ steps.set.outputs.link}}
 
