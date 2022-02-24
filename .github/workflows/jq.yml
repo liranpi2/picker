@@ -23,7 +23,7 @@ jobs:
              echo ::set-output name=link::`curl -s https://api.github.com/repos/VirusTotal/yara/releases/latest | jq .assets[0].browser_download_url`
         - name: use output
           run: |
-            echo $link'
+            echo $link
           env:
             link: ${{ steps.set.outputs.link}}
       
