@@ -23,7 +23,7 @@ jobs:
              echo ::set-output name=link::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest`
         - name: use output
           run: |
-            echo ::set-output name=download_url::"$link | jq .assets[0].browser_download_url"
+            echo ::set-output name=download_url::`$link | jq .assets[0].browser_download_url`
             echo $download_url
           env:
             link: ${{ steps.set.outputs.link}}
