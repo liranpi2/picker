@@ -1,4 +1,4 @@
-name: pick
+name: jq
 
 on:
   workflow_dispatch:
