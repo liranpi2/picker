@@ -1,0 +1,55 @@
+name: pick
+
+on:
+  workflow_dispatch:
+    inputs:
+          logLevel:
+            description: 'Log level'     
+            required: true
+            default: 'warning'
+          tags:
+            description: 'build scenario tag'  
+            
+permissions: write-all
+
+jobs:
+  pick:
+    runs-on: ubuntu-latest
+   
+    steps:
+      - name: checkout current
+        uses: actions/checkout@v2
+        
+      - name: create a subdirectory
+        run: |
+          mkdir test
+          
+      - name: download sources
+        id: get_source
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: "MichaelGrafnetter/DSInternals"
+          version: "tags/v4.7"
+          file: "v4.7.zip"
+          target: "test/v4.7.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
+     
+      - name: create custom release
+        uses: actions/create-release@v1
+        id: create-new-release-source
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v4.7
+          release_name: v4.7.zip
+      
+      - name: upload release   
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release-source.outputs.upload_url }}
+          asset_path: ./test/v4.7.zip
+          asset_name: v4.7.zip
+          asset_content_type: application/zip 
+      
