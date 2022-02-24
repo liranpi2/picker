@@ -26,7 +26,7 @@ jobs:
             echo ::set-output name=file::`${{ steps.set.outputs.link}} | jq .assets[0].name`
         - name: echo
           run: |
-            echo $file
+            echo ${{ steps.set.outputs.file}}
           env:
             link: ${{ steps.set.outputs.link}}
 
