@@ -13,7 +13,7 @@ on:
 permissions: write-all
 
 jobs:
-  pick:
+  jq:
     runs-on: ubuntu-latest
    
     steps:
