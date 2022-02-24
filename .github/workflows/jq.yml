@@ -24,5 +24,7 @@ jobs:
         - name: use output
           run: |
             echo $link
+          env:
+            link: ${{ steps.set.outputs.link}}
 
       
