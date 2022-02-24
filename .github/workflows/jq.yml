@@ -20,10 +20,9 @@ jobs:
         - name: set output
           id: set
           run: |
-             echo ::set-output name=json::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest`
+             echo ::set-output name=json::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest | jq .assets[0].browser_download_url`
         - name: use output
           run: |
-            echo $json | jq .assets[0].browser_download_url
-            echo $json | jq .assets[0].tag_name
+            echo $json
 
       
