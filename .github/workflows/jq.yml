@@ -24,7 +24,7 @@ jobs:
         - name: get filename
           id: filter
           run: |
-             echo ::set-output name=filename::`echo "${{ steps.api.outputs.data}}" | jq .assets[0].name`
+             echo ::set-output name=filename::`echo ${{ steps.api.outputs.data}} | jq .assets[0].name`
         - name: echo
           run: |
             echo ${{ steps.filter.outputs.filename}}
