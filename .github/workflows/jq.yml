@@ -23,5 +23,6 @@ jobs:
              echo ::set-output name=filename::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest`
         - name: echo
           run: |
-            echo "${{ steps.api.outputs.filename}} | jq .assets[0].name | sed 's/\"//g'"
+            test=`echo "${{ steps.api.outputs.filename}}" | jq .assets[0].name | sed 's/\"//g'`
+            echo $test
       
