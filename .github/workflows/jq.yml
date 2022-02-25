@@ -20,7 +20,7 @@ jobs:
         - name: request github api
           id: api
           run: |
-             echo ::set-output name=filename::`curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest`
+             echo "::set-output name=filename::'$(curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest)'"
         - name: echo
           run: |
             echo $filename | jq .assets[0].name | sed 's/\"//g'
