@@ -41,7 +41,7 @@ jobs:
           repo: "MichaelGrafnetter/DSInternals"
           version: "latest"
           file: ${{ steps.api.outputs.filename}}
-          target: "test/DSInternals_v4.7.zip"
+          target: "test/${{ steps.api.outputs.filename}}"
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           echo ${{ steps.get_release.outputs.version }}
@@ -55,8 +55,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v4.7
-          release_name: DSInternals_v4.7.zip
+          tag_name: ${{ steps.api.outputs.tagname}}
+          release_name: ${{ steps.api.outputs.filename}}
       
       - name: upload release   
         uses: actions/upload-release-asset@v1
@@ -64,7 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-          asset_path: ./test/DSInternals_v4.7.zip
-          asset_name: DSInternals_v4.7.zip
+          asset_path: ./test/${{ steps.api.outputs.filename}}
+          asset_name: ${{ steps.api.outputs.filename}}
           asset_content_type: application/zip 
       
