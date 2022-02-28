@@ -19,7 +19,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - id: set-matrix
-      run: echo "::set-output name=matrix::{"repo":"MichaelGrafnetter/DSInternals","filename_cmd":"curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest | jq .assets[0].name  | sed 's/\"//g'","tag_cmd":"curl -s https://api.github.com/repos/MichaelGrafnetter/DSInternals/releases/latest | jq .tag_name  | sed 's/\"//g'"}"
+      run: echo "::set-output name=matrix::{\"repo\":\"MichaelGrafnetter\/DSInternals\",\"filename_cmd\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag_cmd\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\"}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
