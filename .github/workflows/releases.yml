@@ -19,11 +19,10 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        repo1="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"content-type\":"application\/zip",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        repo2="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":"application\/zip",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        repo3_1="\"repo\":\"wagga40\/Zircolite\",\"content-type\":"application\/octet-stream",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .assets[2].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        repo3_2="\"repo\":\"wagga40\/Zircolite\",\"content-type\":"application\/octet-stream",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .assets[5].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        str="{\"include\":[{$repo1},{$repo2}, {$repo3_1}, {$repo3_2}]}"
+        repo1="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"content-type\":\"application\/zip\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        repo2="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":\"application\/zip\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        repo3_1="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .assets[2].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        str="{\"include\":[{$repo1},{$repo2}, {$repo3_1}]}"
         echo "::set-output name=matrix::$str"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
