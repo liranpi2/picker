@@ -19,7 +19,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        str="{\"include\":[{\"repo\":\"foo\",\"cmd1\":\"echo cmd1\", \"cmd2\":\"echo cmd2\"}]}"
+        str="{\"include\":[{\"repo\":\"MichaelGrafnetter\/DSInternals\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\"}]}"
         echo "::set-output name=matrix::$str"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
