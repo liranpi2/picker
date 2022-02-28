@@ -19,7 +19,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        str="{\"include\": [{\"run\": \"run1\"}, {\"run\": \"run2\"}]"
+        str="{\"include\":[{\"repo\":\"foo\",\"cmd1\":\"echo cmd1\", \"cmd2\":\"echo cmd2\"}]}"
         echo "::set-output name=matrix::$str"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -40,8 +40,8 @@ jobs:
     - name: request github api
       id: api
       run: |
-            echo ::set-output name=filename::`${{ matrix.filename_cmd }}`
-            echo ::set-output name=tagname::`${{ matrix.tag_cmd }}`
+            echo ::set-output name=filename::`${{ matrix.cmd1 }}`
+            echo ::set-output name=tagname::`${{ matrix.cmd2 }}`
     - name: echo
       run: |
           echo ${{ steps.api.outputs.filename}}
