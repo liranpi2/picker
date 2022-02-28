@@ -19,7 +19,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        item1 = "\"repo\":\"MichaelGrafnetter\/DSInternals\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        item1="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
         str="{\"include\":[{$item1}]}"
         echo "::set-output name=matrix::$str"
     outputs:
