@@ -1,4 +1,4 @@
-name: pick
+name: releases
 
 on:
   workflow_dispatch:
