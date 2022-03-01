@@ -23,7 +23,7 @@ jobs:
         snaffler="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\",\"asset\": \"repo2.zip\""
         yara="\"repo\":\"VirusTotal\/yara\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\",\"asset\": \"repo3.zip\""
         hardening="\"repo\":\"0x6d69636b\/windows_hardening\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/0x6d69636b\/windows_hardening\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/0x6d69636b\/windows_hardening\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        str="{\"include\":[{$hardening}]}"
+        str="{\"include\":[{$dsinternal},{$snaffler},{$yara}]}"
         echo "::set-output name=matrix::$str"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -57,7 +57,7 @@ jobs:
       with:
           repo: "${{ matrix.repo }}"
           version: "latest"
-          file: v.0.7.0.zip
+          file: ${{ steps.api.outputs.filename}}
           target: "test/${{ steps.api.outputs.filename}}"
           token: ${{ secrets.GITHUB_TOKEN }}
 
