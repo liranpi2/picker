@@ -59,11 +59,7 @@ jobs:
           file: ${{ steps.api.outputs.filename}}
           target: "test/${{ steps.api.outputs.filename}}"
           token: ${{ secrets.GITHUB_TOKEN }}
-    - run: |
-          echo ${{ steps.get_release.outputs.version }}
-          echo ${{ steps.get_release.outputs.name }}
-          echo ${{ steps.get_release.outputs.body }}
-          
+
     - name: create custom release
       uses: actions/create-release@v1
       id: create-new-release
