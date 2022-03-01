@@ -21,9 +21,7 @@ jobs:
       run: |
         repo1="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"content-type\":\"application\/zip\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
         repo2="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":\"application\/zip\",\"cmd1\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"cmd2\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
- 
         str="{\"include\":[{$repo1},{$repo2}]}"
-        str="{\"include\":[{$dsinternals}]}"
         echo "::set-output name=matrix::$str"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
