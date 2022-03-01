@@ -48,7 +48,6 @@ jobs:
       with:
         repository: "${{ matrix.repo }}"
         latest: true
-        zipBall: true
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: create custom release
