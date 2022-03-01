@@ -1,4 +1,4 @@
-name: releases
+name: dsinternal-snaffler-yara
 
 on:
   workflow_dispatch:
