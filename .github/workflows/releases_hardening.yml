@@ -34,11 +34,6 @@ jobs:
     - name: checkout current
       uses: actions/checkout@v2
         
-    - name: create a subdirectory
-      run: |
-          mkdir test
-          cd test
-          
     - name: request github api
       id: api
       run: |
@@ -71,7 +66,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: ./test/v.0.7.0.zip
+        asset_path: ./windows_hardening-v.0.7.0.zip
         asset_name: v.0.7.0.zip
         asset_content_type: ${{ matrix.content-type }}
     
