@@ -68,7 +68,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        id: ${{ steps.create-new-release.outputs.id }}
+        upload_url: ${{ steps.create-new-release.outputs.id }}
         asset_path: "zircolite_win7_embedded.exe"
         asset_name: "zircolite_win7_embedded.exe"
         asset_content_type: ${{ matrix.content-type }}
