@@ -54,7 +54,7 @@ jobs:
         repository: "${{ matrix.repo }}"
         latest: true
         zipBall: true
-        fileName: ${{ steps.api.outputs.filename}
+        fileName: ${{ steps.api.outputs.filename}}
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: create custom release
@@ -72,7 +72,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: ./test/${{ steps.api.outputs.filename}}
+        asset_path: ${{ steps.api.outputs.filename}}
         asset_name: ${{ steps.api.outputs.filename}}
         asset_content_type: ${{ matrix.content-type }}
     
