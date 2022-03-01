@@ -31,7 +31,7 @@ jobs:
     - name: download all
       uses: robinraju/release-downloader@v1.3
       with:
-        repository: "wagga40/Zircolite"
+        repository: "carlospolop/PEASS-ng"
         latest: true
         fileName: "*"
         token: ${{ secrets.GITHUB_TOKEN }}   
