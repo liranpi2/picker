@@ -1,0 +1,126 @@
+name: zircolite
+
+on:
+  workflow_dispatch:
+    inputs:
+          logLevel:
+            description: 'Log level'     
+            required: true
+            default: 'warning'
+          tags:
+            description: 'build scenario tag'  
+            
+permissions: write-all
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout current
+      uses: actions/checkout@v2
+    
+    - name: request github api
+      id: api
+      run: |
+          echo ::set-output name=tagname::`curl -s https://api.github.com/repos/arlospolop/PEASS-ng/releases/latest | jq .tag_name  | sed 's/\"//g'`
+    - name: echo
+      run: |
+          echo ${{ steps.api.outputs.tagname}}
+          
+    - name: download all
+      uses: robinraju/release-downloader@v1.3
+      with:
+        repository: "wagga40/Zircolite"
+        latest: true
+        fileName: "*"
+        token: ${{ secrets.GITHUB_TOKEN }}   
+            
+    - name: create custom release
+      uses: actions/create-release@v1
+      id: create-new-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.api.outputs.tagname}}
+        release_name: "linpeas.sh"
+      
+    - name: upload release linpeas.sh  
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "linpeas.sh"
+        asset_name: "linpeas.sh"
+        asset_content_type: application/content-stream
+    
+    - name: upload release winPEAS.bat  
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEAS.bat"
+        asset_name: "winPEAS.bat"
+        asset_content_type: application/content-stream
+        
+    - name: upload release winPEASany.exe    
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEASany.exe"
+        asset_name: "winPEASany.exe"
+        asset_content_type: application/content-stream
+    
+    - name: upload release winPEASany_ofs.exe    
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEASany_ofs.exe"
+        asset_name: "winPEASany_ofs.exe"
+        asset_content_type: application/content-stream
+   
+   - name: upload release winPEASx64.exe    
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEASx64.exe"
+        asset_name: "winPEASx64.exe"
+        asset_content_type: application/content-stream
+        
+    - name: upload release winPEASx64_ofs.exe   
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEASx64_ofs.exe"
+        asset_name: "winPEASx64_ofs.exe"
+        asset_content_type: application/content-stream
+        
+    - name: upload release winPEASx86.exe    
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEASx86.exe"
+        asset_name: "winPEASx86.exe"
+        asset_content_type: application/content-stream
+        
+    - name: upload release winPEASx86_ofs.exe    
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+        asset_path: "winPEASx86_ofs.exe"
+        asset_name: "winPEASx86_ofs.exe"
+        asset_content_type: application/content-stream
