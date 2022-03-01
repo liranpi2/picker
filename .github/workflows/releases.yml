@@ -19,9 +19,9 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        dsinternal="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        snaffler="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        yara="\"repo\":\"VirusTotal\/yara\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        dsinternal="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\",\"asset\": \"repo1.zip\""
+        snaffler="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\",\"asset\": \"repo2.zip\""
+        yara="\"repo\":\"VirusTotal\/yara\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\",\"asset\": \"repo3.zip\""
         str="{\"include\":[{$dsinternal},{$snaffler},{$yara}]}"
         echo "::set-output name=matrix::$str"
     outputs:
@@ -76,6 +76,6 @@ jobs:
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
         asset_path: ./test/${{ steps.api.outputs.filename}}
-        asset_name: ${{ steps.api.outputs.filename}}
+        asset_name: ${{ matrix.asset }}
         asset_content_type: ${{ matrix.content-type }}
     
