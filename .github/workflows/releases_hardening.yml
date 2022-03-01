@@ -1,4 +1,4 @@
-name: releases
+name: hardening
 
 on:
   workflow_dispatch:
