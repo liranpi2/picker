@@ -55,7 +55,7 @@ jobs:
           repo: "${{ matrix.repo }}"
           version: "latest"
           file: v.0.7.0.zip
-          target: "test/${{ steps.api.outputs.filename}}"
+          target: "test/v.0.7.0.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: create custom release
@@ -65,7 +65,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.api.outputs.tagname}}
-        release_name: ${{ steps.api.outputs.filename}}
+        release_name: v.0.7.0
       
     - name: upload release   
       uses: actions/upload-release-asset@v1
@@ -74,6 +74,6 @@ jobs:
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
         asset_path: ./test/v.0.7.0.zip
-        asset_name: ${{ steps.api.outputs.filename}}
+        asset_name: v.0.7.0.zip
         asset_content_type: ${{ matrix.content-type }}
     
