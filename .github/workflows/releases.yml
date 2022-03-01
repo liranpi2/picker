@@ -37,10 +37,6 @@ jobs:
     - name: checkout current
       uses: actions/checkout@v2
         
-    - name: create a subdirectory
-      run: |
-          mkdir test
-
     - name: request github api
       id: api
       run: |
@@ -53,13 +49,13 @@ jobs:
 
     - name: download release
       id: get_release
-      uses: dsaltares/fetch-gh-release-asset@master
+      uses: robinraju/release-downloader@v1.3
       with:
-          repo: "${{ matrix.repo }}"
-          version: "latest"
-          file: ${{ steps.api.outputs.filename}}
-          target: "test/${{ steps.api.outputs.filename}}"
-          token: ${{ secrets.GITHUB_TOKEN }}
+        repository: "${{ matrix.repo }}"
+        latest: true
+        zipBall: true
+        fileName: ${{ steps.api.outputs.filename}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: create custom release
       uses: actions/create-release@v1
