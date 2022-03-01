@@ -17,32 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - id: set-matrix
-      run: |
-        hardening="\"repo\":\"0x6d69636b\/windows_hardening\",\"content-type\":\"application\/zip\",\"file\":\"v.0.7.0.zip  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/0x6d69636b\/windows_hardening\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        str="{\"include\":[{$hardening}]}"
-        echo "::set-output name=matrix::$str"
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-  
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
-    steps:
     - name: checkout current
       uses: actions/checkout@v2
         
     - name: request github api
       id: api
       run: |
-            echo ::set-output name=tagname::`${{ matrix.tag }}`
+          echo ::set-output name=tagname::`curl -s https://api.github.com/repos/0x6d69636b/windows_hardening/releases/latest | jq .tag_name  | sed 's/\"//g'`
     - name: echo
       run: |
           echo ${{ steps.api.outputs.tagname}}
-   
-    - name: download release
+            
+    - name: download zipBall
       id: get_release
       uses: robinraju/release-downloader@v1.3
       with:
@@ -59,7 +45,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.api.outputs.tagname}}
-        release_name: v.0.7.0.zip
+        release_name: ${{ steps.api.outputs.tagname}}.zip
       
     - name: upload release   
       uses: actions/upload-release-asset@v1
@@ -68,6 +54,6 @@ jobs:
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
         asset_path: ./windows_hardening-v.0.7.0.zip
-        asset_name: v.0.7.0.zip
-        asset_content_type: ${{ matrix.content-type }}
+        asset_name: ${{ steps.api.outputs.tagname}}.zip
+        asset_content_type: application/octet-stream
     
