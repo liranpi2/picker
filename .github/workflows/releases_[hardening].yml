@@ -32,7 +32,7 @@ jobs:
       id: get_release
       uses: robinraju/release-downloader@v1.3
       with:
-        repository: "${{ matrix.repo }}"
+        repository: "0x6d69636b/windows_hardening"
         latest: true
         zipBall: true
         fileName: "*"
