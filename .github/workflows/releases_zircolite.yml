@@ -71,5 +71,5 @@ jobs:
         upload_url: ${{ steps.create-new-release.outputs.id }}
         asset_path: "zircolite_win7_embedded.exe"
         asset_name: "zircolite_win7_embedded.exe"
-        asset_content_type: ${{ matrix.content-type }}
+        asset_content_type: application/content-stream
     
