@@ -19,8 +19,8 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        zircolite_1="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"file\":\"zircolite_win10_nuitka_embedded.exe  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        zircolite_2="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"file\":\"zircolite_win7_embedded.exe  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        zircolite_1="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"file\":\"zircolite_win10_nuitka_embedded.exe\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
+        zircolite_2="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"file\":\"zircolite_win7_embedded.exe\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
         str="{\"include\":[{$zircolite_1},{$zircolite_2}]}"
         echo "::set-output name=matrix::$str"
     outputs:
