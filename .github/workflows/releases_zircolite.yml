@@ -15,41 +15,33 @@ permissions: write-all
 jobs:
   job1:
     runs-on: ubuntu-latest
-    
-    steps:
-    - id: set-matrix
-      run: |
-        zircolite_1="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"file\":\"zircolite_win10_nuitka_embedded.exe\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        zircolite_2="\"repo\":\"wagga40\/Zircolite\",\"content-type\":\"application\/octet-stream\",\"file\":\"zircolite_win7_embedded.exe\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/wagga40\/Zircolite\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        str="{\"include\":[{$zircolite_1},{$zircolite_2}]}"
-        echo "::set-output name=matrix::$str"
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-  
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
+
     steps:
     - name: checkout current
       uses: actions/checkout@v2
-        
+    
     - name: request github api
       id: api
       run: |
-            echo ::set-output name=tagname::`${{ matrix.tag }}`
+          echo ::set-output name=tagname::`curl -s https://api.github.com/repos/wagga40/Zircolite/releases/latest | jq .tag_name  | sed 's/\"//g'`
     - name: echo
       run: |
           echo ${{ steps.api.outputs.tagname}}
-   
-    - name: download release
-      id: get_release
+          
+    - name: download release zircolite_win10_nuitka_embedded.exe
       uses: robinraju/release-downloader@v1.3
       with:
-        repository: "${{ matrix.repo }}"
+        repository: "wagga40/Zircolite"
         latest: true
-        fileName: "${{ matrix.file }}"
+        fileName: "zircolite_win10_nuitka_embedded.exe"
+        token: ${{ secrets.GITHUB_TOKEN }}   
+    
+    - name: download release zircolite_win7_embedded.exe
+      uses: robinraju/release-downloader@v1.3
+      with:
+        repository: "wagga40/Zircolite"
+        latest: true
+        fileName: "zircolite_win7_embedded.exe"
         token: ${{ secrets.GITHUB_TOKEN }}
           
     - name: create custom release
@@ -59,16 +51,25 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.api.outputs.tagname}}
-        release_name: ${{ matrix.file }}
-      continue-on-error: true
+        release_name: "zircolite_win10_nuitka_embedded.exe"
       
-    - name: upload release   
+    - name: upload release zircolite_win10_nuitka_embedded.exe  
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: ${{ matrix.file }}
-        asset_name: ${{ matrix.file }}
+        asset_path: "zircolite_win10_nuitka_embedded.exe"
+        asset_name: "zircolite_win10_nuitka_embedded.exe"
+        asset_content_type: application/content-stream
+    
+    - name: upload release    
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        id: ${{ steps.create-new-release.outputs.id }}
+        asset_path: "zircolite_win7_embedded.exe"
+        asset_name: "zircolite_win7_embedded.exe"
         asset_content_type: ${{ matrix.content-type }}
     
