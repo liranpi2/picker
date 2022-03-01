@@ -21,9 +21,8 @@ jobs:
       run: |
         dsinternal="\"repo\":\"MichaelGrafnetter\/DSInternals\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/MichaelGrafnetter\/DSInternals\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
         snaffler="\"repo\":\"SnaffCon\/Snaffler\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/SnaffCon\/Snaffler\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        hardening="\"repo\":\"0x6d69636b\/windows_hardening\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/0x6d69636b\/windows_hardening\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/0x6d69636b\/windows_hardening\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
         yara="\"repo\":\"VirusTotal\/yara\",\"content-type\":\"application\/zip\",\"file\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .assets[0].name  | sed 's\/\\\"\/\/g'\",\"tag\":\"curl -s https:\/\/api.github.com\/repos\/VirusTotal\/yara\/releases\/latest | jq .tag_name  | sed 's\/\\\"\/\/g'\""
-        str="{\"include\":[{$dsinternal},{$snaffler},{$hardening},{$yara}]}"
+        str="{\"include\":[{$dsinternal},{$snaffler},{$yara}]}"
         echo "::set-output name=matrix::$str"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
