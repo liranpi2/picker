@@ -1,4 +1,4 @@
-name: dsinternal
+name: dsinternal release workflow
 
 on:
   workflow_dispatch:
