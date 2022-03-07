@@ -40,7 +40,7 @@ jobs:
         release_name: ${{ steps.api.outputs.tagname}}.zip
         draft: false
         prerelease: false
-        body: releases_[hardening].yml - ${{ matrix.tag }}
+        body: releases_[hardening].yml - ${{ steps.api.outputs.tagname }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
