@@ -38,7 +38,7 @@ jobs:
         release_name: "linpeas.sh"
         draft: false
         prerelease: false
-        body: releases_[peass].yml - ${{ matrix.tag }}
+        body: releases_[peass].yml - ${{ steps.api.outputs.tagname }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
