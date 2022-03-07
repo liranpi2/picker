@@ -57,12 +57,15 @@ jobs:
     - name: create custom release
       uses: actions/create-release@v1
       id: create-new-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.api.outputs.tagname}}
         release_name: ${{ steps.api.outputs.filename}}
-      
+        draft: false
+        prerelease: false
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: upload release   
       uses: actions/upload-release-asset@v1
       env:
