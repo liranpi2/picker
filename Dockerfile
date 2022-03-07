@@ -9,9 +9,7 @@
 # a set of file systems constructs like folders and device files. 
 # every container, when it is running uses the kernel of the host it's running on
 # so the container itself doesn't come packaged with its own kernel.
-
 FROM node:current-alpine
-
 
 # metadata telling who to hustle about the app
 LABEL org.opencontainers.image.title="Hello Docker Learners!" \
