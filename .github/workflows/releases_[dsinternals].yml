@@ -62,7 +62,7 @@ jobs:
         release_name: ${{ steps.api.outputs.filename}}
         draft: false
         prerelease: false
-        body_path: CHANGELOG.md
+        body: dsinternal
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
