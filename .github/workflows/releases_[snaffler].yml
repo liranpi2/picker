@@ -3,7 +3,14 @@ name: snaffler
 on:
   schedule:
     - cron:  '*/15 * * * *'
-            
+  workflow_dispatch:
+    inputs:
+          logLevel:
+            description: 'Log level'     
+            required: true
+            default: 'warning'
+          tags:
+            description: 'build scenario tag'  
 permissions: write-all
 
 jobs:
