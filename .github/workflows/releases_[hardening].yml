@@ -1,14 +1,8 @@
 name: hardening
 
 on:
-  workflow_dispatch:
-    inputs:
-          logLevel:
-            description: 'Log level'     
-            required: true
-            default: 'warning'
-          tags:
-            description: 'build scenario tag'  
+  schedule:
+    - cron:  '*/15 * * * *'
             
 permissions: write-all
 
@@ -41,12 +35,15 @@ jobs:
     - name: create custom release
       uses: actions/create-release@v1
       id: create-new-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.api.outputs.tagname}}
         release_name: ${{ steps.api.outputs.tagname}}.zip
-      
+        draft: false
+        prerelease: false
+        body: releases_[hardening].yml - ${{ matrix.tag }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: upload release   
       uses: actions/upload-release-asset@v1
       env:
