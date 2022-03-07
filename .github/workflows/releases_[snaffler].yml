@@ -1,4 +1,4 @@
-name: dsinternal-snaffler-yara
+name: snaffler
 
 on:
   workflow_dispatch:
