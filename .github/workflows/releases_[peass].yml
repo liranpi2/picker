@@ -25,7 +25,7 @@ jobs:
     - name: request github api
       id: api
       run: |
-          echo ::set-output name=tagname::`curl -s https://api.github.com/repos/arlospolop/PEASS-ng/releases/latest | jq .tag_name  | sed 's/\"//g'`
+          echo ::set-output name=tagname::`curl -s https://api.github.com/repos/carlospolop/PEASS-ng/releases/latest | jq .tag_name  | sed 's/\"//g'`
     - name: echo
       run: |
           echo ${{ steps.api.outputs.tagname}}
