@@ -56,7 +56,7 @@ jobs:
         release_name: ${{ steps.api.outputs.filename}}
         draft: false
         prerelease: false
-        body: dsinternal ${{ matrix.tag }}
+        body: releases_[dsinternals].yml - ${{ matrix.tag }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
